@@ -1,0 +1,47 @@
+package com.example.pruebamemoria
+
+import android.graphics.Color
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+
+class CardAdapter(
+    private var cards: List<Card>,
+    private val onCardClick: (Int) -> Unit
+) : RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
+
+    inner class CardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val tvCard: TextView = view.findViewById(R.id.tvCard)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_card, parent, false)
+        return CardViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
+        val card = cards[position]
+
+        if (card.isFaceUp || card.isMatched) {
+            holder.tvCard.text = card.id.toString()
+            holder.tvCard.setBackgroundColor(Color.WHITE)
+        } else {
+            holder.tvCard.text = ""
+            holder.tvCard.setBackgroundColor(Color.GRAY)
+        }
+
+        holder.itemView.setOnClickListener {
+            onCardClick(position)
+        }
+    }
+
+    override fun getItemCount() = cards.size
+
+    fun updateCards(newCards: List<Card>) {
+        cards = newCards
+        notifyDataSetChanged()
+    }
+}
