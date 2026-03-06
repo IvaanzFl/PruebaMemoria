@@ -2,11 +2,9 @@ package com.example.pruebamemoria
 
 import android.os.Handler
 import android.os.Looper
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlin.collections.toMutableList
 
 class GameViewModel : ViewModel() {
     private val _winEvent = MutableLiveData<Boolean>()
