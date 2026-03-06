@@ -1,10 +1,9 @@
 package com.example.pruebamemoria
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 
 class CardAdapter(
@@ -13,7 +12,7 @@ class CardAdapter(
 ) : RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
 
     inner class CardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvCard: TextView = view.findViewById(R.id.tvCard)
+        val ivCard: ImageView = view.findViewById(R.id.ivCard)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
@@ -26,11 +25,12 @@ class CardAdapter(
         val card = cards[position]
 
         if (card.isFaceUp || card.isMatched) {
-            holder.tvCard.text = card.id.toString()
-            holder.tvCard.setBackgroundColor(Color.WHITE)
+            holder.ivCard.setImageResource(card.imageResId)
+            holder.ivCard.setPadding(0, 0, 0, 0)
         } else {
-            holder.tvCard.text = ""
-            holder.tvCard.setBackgroundColor(Color.GRAY)
+            holder.ivCard.setImageResource(R.drawable.card_back)
+            val padding = 16
+            holder.ivCard.setPadding(padding, padding, padding, padding)
         }
 
         holder.itemView.setOnClickListener {

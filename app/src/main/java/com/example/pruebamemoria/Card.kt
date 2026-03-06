@@ -1,7 +1,8 @@
 package com.example.pruebamemoria
 
+import androidx.annotation.DrawableRes
 data class Card(
-    val id: Int,          // Identificador del par
+    @DrawableRes val imageResId: Int,
     var isFaceUp: Boolean = false,
     var isMatched: Boolean = false
 )

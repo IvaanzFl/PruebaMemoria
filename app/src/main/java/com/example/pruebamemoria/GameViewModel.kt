@@ -25,10 +25,20 @@ class GameViewModel : ViewModel() {
     }
 
     fun startGame() {
-        val cardValues = (1..8).toList()  // 8 pares (16 cartas)
-        val shuffledCards = (cardValues + cardValues)
+        val imageResources = listOf(
+            R.drawable.img_1,
+            R.drawable.img_2,
+            R.drawable.img_3,
+            R.drawable.img_4,
+            R.drawable.img_5,
+            R.drawable.img_6,
+            R.drawable.img_7,
+            R.drawable.img_8
+        )
+
+        val shuffledCards = (imageResources + imageResources)
             .shuffled()
-            .map { Card(it) }
+            .map { Card(imageResId = it) }
 
         _cards.value = shuffledCards
         _moves.value = 0
@@ -52,8 +62,7 @@ class GameViewModel : ViewModel() {
             _moves.value = _moves.value?.plus(1)
 
             val firstCard = currentCards[firstSelectedCardIndex!!]
-
-            if (firstCard.id == selectedCard.id) {
+            if (firstCard.imageResId == selectedCard.imageResId) {
                 firstCard.isMatched = true
                 selectedCard.isMatched = true
                 firstSelectedCardIndex = null
